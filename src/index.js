@@ -10,10 +10,13 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
-    // <BrowserRouter>
-        <App />,
-    // </BrowserRouter>,
-    document.getElementById('root'));
+	<BrowserRouter>
+		<App />
+	</BrowserRouter>,
+	document.getElementById('root')
+)
 
 
 registerServiceWorker();
+
+/* I used the BrowserRouter from react-router-dom, which will allow some client-side routing. Specifically, we’ll use it to render the signup form when the url has “/signup” and the login form when the url has “/login”.  */
