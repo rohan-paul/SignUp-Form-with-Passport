@@ -63,7 +63,7 @@ How do I know if this is necessary for my store? The best way to know is to chec
 
 // From official doc - https://github.com/jaredhanson/passport#middleware - To use Passport in an Express or Connect-based application, configure it with the required passport.initialize() middleware. If your application uses persistent login sessions (recommended, but not required), passport.session() middleware must also be used.
 app.use(passport.initialize())
-app.use(passport.session())
+app.use(passport.session())  // calls the deserializeUser
 
 
 // set the single Routes
