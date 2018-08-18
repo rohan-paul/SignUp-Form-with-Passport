@@ -2,7 +2,13 @@ const express = require('express')
 const bodyParser = require('body-parser');
 const morgan = require('morgan')
 const session = require('session')
+
 const dbConnection = require('./database')
+/* MongoStore allows me to store the Express sessions into MongoDB instead of using the MemoryStore, which is not designed for a production environment. I do it down below where I am calling express-session's session function and within the object that I am passing to session, the store variable inside the object is for setting MongoDB as my backend, for persisting the application session in my database.
+Note - express-session by default uses a MemoryStore (in-memory key-value store for storing session data) implementation that is only designed for development environments, but cant scale in production, as after few user logins it can no more handle all those session data and will crash wiping out all session data
+connect-mongo will store my user sessions in my db in a collection named sessions and takes care of removing them based on the maxAge of the cookie configuration for the session. */
+
+
 const MongoStore = require('connect-mongo')(session)
 const passport = require('./passport')
 const app = express()
