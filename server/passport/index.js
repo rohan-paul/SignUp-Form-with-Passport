@@ -29,6 +29,7 @@ passport.serializeUser((user, done) => {
     done(null, { _id: user._id})
 })
 
+/* Then in deserializeUser(), the first argument is an id which is the same id that was passed in done(null, user.id) of serializeUser(). deserializeUser() then makes a request to our DB to find the full profile information for the user and then calls done(null, user). This is where the user profile is attached to the request handler at req.user. Then finally after all this occurs, the user is routed back to the /login/google/return route handler where we can finally access the user profile information on req.user. - https://hackernoon.com/passportjs-the-confusing-parts-explained-edca874ebead */
 
 passport.deserializeUser((id, done) => {
     console.log('DeserializeUser called')

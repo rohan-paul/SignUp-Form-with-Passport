@@ -1,4 +1,4 @@
-## Simple MERN Passport Template for a sign-in and sign-up form built with Mongo, Express, ReactJS, Node.js. 
+## Simple MERN Passport Template for a sign-in and sign-up form built with Mongo, Express, ReactJS, Node.js.
 
 For authentication, I am using passport-local strategy and for salting, I am using bcrypt
 
