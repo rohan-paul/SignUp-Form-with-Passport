@@ -4,12 +4,12 @@ const morgan = require('morgan')
 const session = require('session')
 
 const dbConnection = require('./database')
+
+const MongoStore = require('connect-mongo')(session)
 /* MongoStore allows me to store the Express sessions into MongoDB instead of using the MemoryStore, which is not designed for a production environment. I do it down below where I am calling express-session's session function and within the object that I am passing to session, the store variable inside the object is for setting MongoDB as my backend, for persisting the application session in my database.
 Note - express-session by default uses a MemoryStore (in-memory key-value store for storing session data) implementation that is only designed for development environments, but cant scale in production, as after few user logins it can no more handle all those session data and will crash wiping out all session data
 connect-mongo will store my user sessions in my db in a collection named sessions and takes care of removing them based on the maxAge of the cookie configuration for the session. */
 
-
-const MongoStore = require('connect-mongo')(session)
 const passport = require('./passport')
 const app = express()
 const PORT = 8080
@@ -63,7 +63,13 @@ How do I know if this is necessary for my store? The best way to know is to chec
 
 // From official doc - https://github.com/jaredhanson/passport#middleware - To use Passport in an Express or Connect-based application, configure it with the required passport.initialize() middleware. If your application uses persistent login sessions (recommended, but not required), passport.session() middleware must also be used.
 app.use(passport.initialize())
-app.use(passport.session())  // calls the deserializeUser
+
+// Then start the passport session. The below code calls serializeUser and deserializeUser
+app.use(passport.session())
+
+/* These lines of code run on every request. They call functions in the passport/index.js called serializeUser and deserializeUser. serializeUser stores the user id to req.session.passport.user = {id:’..’}.
+
+deserializeUser will check to see if this user is saved in the database, and if it is found it assigns it to the request as req.user = {user object}. */
 
 
 // set the single Routes

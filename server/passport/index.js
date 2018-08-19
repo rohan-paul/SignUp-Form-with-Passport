@@ -2,7 +2,7 @@ const passport = require('passport')
 const LocalStrategy = require('./localStrategy')
 const User = require('../database/models/user')
 
-/* called on login, saves the id to session req.session.passport.user = {id:'..'}
+/* Key Point - When you log in, passport will put the user object (username and password and whatever else you’re saving — email, etc) into req.session.passport.user with the serializeUser() method. Then on future requests, you don’t need to ask the user to log in again for the life of the session.
 
 Important Key Point - The user id (you provide as the second argument of the done function) is saved in the session and is later used to retrieve the whole object via the deserializeUser function.
 

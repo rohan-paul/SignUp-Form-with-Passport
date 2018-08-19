@@ -10,7 +10,17 @@ class Signup extends Component {
             password: '',
             confirmPassword: ''
         }
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
+
+    handleChange(event) {
+        this.setState({
+            [this.target.name]: this.target.value
+        })
+    }
+
+
 
     render () {
         return (
