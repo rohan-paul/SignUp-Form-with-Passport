@@ -4,6 +4,8 @@ import axios from 'axios'
 import { Route, Link } from 'react-router-dom'
 import Home from './components/Home'
 import Signup from './components/Signup'
+import LoginForm from './components/login-form'
+import Navbar from './components/navbar'
 
 import './App.css';
 import { runInContext } from 'vm';
