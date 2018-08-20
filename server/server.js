@@ -72,7 +72,19 @@ app.use(passport.session())
 deserializeUser will check to see if this user is saved in the database, and if it is found it assigns it to the request as req.user = {user object}. */
 
 
-// set the single Routes
+/*The first line below means, I want /user browser url route to go to user.js route file. The second argument to app.use ('user' variable) means I am referring to './routes/user.js' file which I imported above.
+
+The path to app.use() is a "mount" or "prefix" path and the purpose of which is to limit the middleware to only apply to any paths requested that begin with this prefixed path.
+
+So, whatever path I am adding in < router.get('/', callback()) > in file in './routes/user' - that will only be added after the path, I am specifying here in this main server.js file. Means if in './routes/user.js' file I have the below
+
+router.post('/logout', callback()) the route actually in the browser will be '/user/logout'
+
+And thats why in ..src/components/navbar.js when I am doing axios.get I have to pass the actualt browser url which will be below
+
+axios.post('/user/logout').then(cb())
+*/
+
 app.use('/user', user)
 
 app.listen(PORT, () => {

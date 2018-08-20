@@ -24,8 +24,8 @@ The first argument of deserializeUser corresponds to the key of the user object 
 
 */
 passport.serializeUser((user, done) => {
-    console.log('*** serialization called, user: ');
-    console.log(user);
+    // console.log('***serialization called, user: '); // only for debugging to see result in terminal
+    // console.log(user); // the whole raw user object - only for debugging to see result in terminal
     done(null, { _id: user._id})
 })
 
@@ -37,8 +37,8 @@ passport.deserializeUser((id, done) => {
         {_id: id},
         'username',
         (err, user) => {
-            console.log('*** Deserialize called, user: ');
-            console.log(user);
+            console.log('*** Deserialize called, user: '); // only for debugging to see result in terminal
+            console.log(user); // the whole raw user object - only for debugging to see result in terminal
             done(null, user)
         }
     )
