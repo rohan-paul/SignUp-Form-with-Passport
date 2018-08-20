@@ -40,17 +40,31 @@ class Navbar extends Component {
                         {loggedIn ? (
                             <section className="navbar-section">
                                 <Link to="#" className="btn btn-link text-secondary" onClick={this.logout}>
-                                <span className="text-secondary">Logout</span>
+                                    <span className="text-secondary">Logout</span>
                                 </Link>
+
                             </section>
                         ) : (
                             <section className="navbar-section">
+                                <Link to="/" className="btn btn-link text-secondary" >
+                                    <span className="text-secondary">Home</span>
+                                    </Link>
+                                <Link to="/login" className="btn btn-link text-secondary" >
+                                    <span className="text-secondary">Login</span>
+                                    </Link>
+                                <Link to="/Signup" className="btn btn-link text-secondary" >
+                                    <span className="text-secondary">Signup</span>
+                                    </Link>
                             </section>
                         )}
                     </div>
+                    <div className="col-4 col-mr-auto">
+                            <div id="top-filler"></div>
+                                <img src="{logo}" alt="" className="App-logo" alt="logo"/>
+                                <h1 className="App-title">MERN Passport bcrypt express-session Auth</h1>
+                        </div>
                 </header>
             </div>
-
         );
     }
 }
