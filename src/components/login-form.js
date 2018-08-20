@@ -69,7 +69,7 @@ render () {
                                 name="username"
                                 placeholder="Username"
                                 value={this.state.username}
-                                onChange={this.handleChange}                                
+                                onChange={this.handleChange}
                                 />
                             </div>
                         </div>
@@ -84,11 +84,16 @@ render () {
                                 name="password"
                                 placeholder="please put your password here"
                                 value={this.state.password}
-                                onChange={this.handleChange}                                
+                                onChange={this.handleChange}
                                 />
                             </div>
                         </div>
-
+                        <div className="form-group">
+                            <div className="col-7"></div>
+                                <button className="btn btn-primary col-1 col-mr-auto"
+                                    onClick={this.handleSubmit}
+                                    type="submit">Login</button>
+                        </div>
                     </form>
             </div>
         )
@@ -102,7 +107,7 @@ export default LoginForm
 
 The HTTP post request is performed by calling axios.post(). In its first parameter we’re passing in the URI of the service endpoint. In the second parameter, we’re passing in the full user object which contains the properties of the user: username and password. By default these two properties are set to be empty string.
 
-2> axios.post() - Good explanation - (https://www.sitepoint.com/axios-beginner-guide/)
+2> axios.post() - Good explanation - https://www.sitepoint.com/axios-beginner-guide/
 
 The post, put, and patch methods take a data object as their second argument, and an optional config object as the third
 
@@ -110,10 +115,15 @@ The response object
 When the request is successful, your then() callback will receive a response object with the following properties:
 
 data: the payload returned from the server. By default, Axios expects JSON and will parse this back into a JavaScript object for you.
+
 status: the HTTP code returned from the server.
+
 statusText: the HTTP status message returned by the server.
+
 headers: all the headers sent back by the server.
+
 config: the original request configuration.
+
 request: the actual XMLHttpRequest object (when running in a browser).
 
 *******************************************

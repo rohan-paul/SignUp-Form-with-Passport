@@ -46,7 +46,7 @@ app.post('/login',
 
 By default, if authentication fails, Passport will respond with a 401 Unauthorized status, and any additional route handlers will not be invoked. If authentication succeeds, the next handler will be invoked and the req.user property will be set to the authenticated user.
 
-4> The "login" route is defined using the Router.post() method, which responds only to HTTP POST requests. The first argument to this method is the URL path while the second is a callback function that will be invoked if an HTTP POST request with the path is received.
+4> The "login" route is defined using the router.post() method, which responds only to HTTP POST requests. The first argument to this method is the URL path while the second is a callback function that will be invoked if an HTTP POST request with the path is received.
 
 
 5> The callback function passport.authenticate here calls send() on the response to return the string userInfo when we receive a POST request with the path ('/login').
