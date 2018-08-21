@@ -8,7 +8,7 @@ router.post('/', (req, res) => {
     console.log('user signup')
 
     // from req.body - which will be { username: 'rohanpaul2@gmail.com', password: '123456' }
-    // assign the username and password with ES-6-destructuring to the below
+    // assign the username and password variable with ES-6-destructuring to be equal the value of req.body.username and req.body.password respectively
     const { username, password } = req.body;
 
     // check to see that new user does not exists in the database and also there's no error while creating the new user
@@ -36,7 +36,7 @@ router.post('/', (req, res) => {
 // For logging-in a user who is already signed-up
 router.post('/login',
     (req, res, next) => {
-        console.log('routes/user.js, login, req.body: ')
+        console.log('routes/user.js, login, the value of req.body is: ') // line only for debugging for me
         console.log(req.body)
         /* the above is only for debugging and will print in the terminal -  { username: 'rohanpaul2@gmail.com', password: '123456' }  */
         next()
@@ -56,6 +56,31 @@ router.post('/login',
         res.send(userInfo)
     }
 )
+
+// Only a get route to see the user
+router.get('/', (req, res, next) => {
+    console.log('*****user*****')
+    console.log(req.user) ;
+    if (req.user) {
+        res.json({user: req.user})
+    } else {
+        res.json({user: null})
+    }
+})
+
+// route for logging out the user. So this router will handle axios.post('/user/logout') request coming from client
+router.post('/logout', (req, res) => {
+    if (req.user) {
+        // console.log('Before logging out see the contents of req.body');
+        // console.log(req.body);
+        // req.logout()
+        res.send({ msg: 'loggging out' })
+    } else {
+        res.send({msg: 'no user to logout'})
+    }
+
+
+
 
 
 
