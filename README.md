@@ -19,7 +19,7 @@ npm run dev
 - [ ] Store data for production in sessions with connect-mongo
 
 
-## [Actual implementation in this super basic sign-up form](https://github.com/rohan-paul/SignUp-Form-with-Passport)
+# [Actual workflow is super basic sign-up form](https://github.com/rohan-paul/SignUp-Form-with-Passport)
 
 ### Step-1 -
 
@@ -87,6 +87,11 @@ router.post('/login',
     passport.authenticate('local'),
     (req, res) => {
         console.log('loggedin', req.user);
+    /* the  above line is only for debugging and will print the below in Terminal
+        logged in { _id: 5b7a79a545de52523ea1a482,
+        username: 'rohanpaul2@gmail.com',
+        password: '$2a$10$9eC8kXcVduG3885FLT1AweYIYsfvwLUIFJ65lvIvUZQZhcWpL6H0q',
+ } */
         var userInfor = {
             username: req.user.username
         };
@@ -114,6 +119,6 @@ app.post('/login',
   });
 ```
 
-By default, if authentication fails, Passport will respond with a 401 Unauthorized status, and any additional route handlers will not be invoked. If authentication succeeds, the next handler will be invoked and the req.user property will be set to the authenticated user.
+By default, if authentication fails, Passport will respond with a 401 Unauthorized status, and any additional route handlers will not be invoked. If authentication succeeds, the next handler will be invoked and the **req.user** property will be set to the authenticated user.
 
 4> The "login" route is defined using the router.post() method, which responds only to HTTP POST requests. The first argument to this method is the URL path while the second is a callback function that will be invoked if an HTTP POST request with the path is received.
