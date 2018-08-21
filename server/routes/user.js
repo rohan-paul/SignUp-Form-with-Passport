@@ -1,6 +1,8 @@
+// this is route.js file
+
 const express = require('express')
 const router = express.Router()
-const User = require('..database/models/user')
+const User = require('../database/models/user')
 const passport = require('../passport')
 
 // route for signing-up a new user
@@ -50,7 +52,7 @@ router.post('/login',
         password: '$2a$10$9eC8kXcVduG3885FLT1AweYIYsfvwLUIFJ65lvIvUZQZhcWpL6H0q',
  }
 */
-        var userInfor = {
+        var userInfo = {
             username: req.user.username
         };
         res.send(userInfo)
@@ -78,21 +80,20 @@ router.post('/logout', (req, res) => {
     } else {
         res.send({msg: 'no user to logout'})
     }
+})
+
+module.exports = router;
 
 
+/*
 
-
-
-
-
-
-/* Explanation of login route ('/login') above - which is also GENERAL NOTES ON HOW ROUTER WORKS IN EXPRESS
+Explanation of login route ('/login') above - which is also GENERAL NOTES ON HOW ROUTER WORKS IN EXPRESS
 
 1> next() =>> You could have multiple routes that match an incoming request. Routes are executed from top to bottom. If a route matches an incoming request, subsequent routes that match the incoming request won’t be hit if you don’t call next(). Calling ``next()`` allows “the buck to NOT stop here”.
 
 2> Also express.Router middleware as it allows us to group the route handlers for a particular part of a site together and access them using a common route-prefix. So in this case, the first callback function to router.post takes an object to which I pass three handlers.
 
-3> passport.authenticate() - http://www.passportjs.org/docs/downloads/html/ -
+3> passport.authenticate() - http://www.passportjs.org/docs/downloads/html/
 
 
 Authenticating requests is as simple as calling passport.authenticate() and specifying which strategy to employ (  its first parameter, in this case 'local' ). authenticate()'s function signature is standard Connect middleware, which makes it convenient to use as route middleware in Express applications.
@@ -131,5 +132,6 @@ Finds one document.
 The conditions are cast to their respective SchemaTypes before the command is sent.
 
 // find one iphone adventures - iphone adventures??
-Adventure.findOne({ type: 'iphone' }, function (err, adventure) {});
-*/
+Adventure.findOne({ type: 'iphone' }, function (err, adventure) {})
+
+ */

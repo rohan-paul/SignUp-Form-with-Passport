@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 mongoose.promise = Promise;
 
 /*
@@ -24,13 +24,14 @@ const userSchema = new Schema({
 
 // Defining Schema methods
 userSchema.methods = {
-    checkPassword: (inputPassword) => {
-        return bcrypt.compareSync(inputPassword, this.password)
-    },
-    hashPassword: (plainTextPassword) => {
-        return bcrypt.hashSync(plainTextPassword, 10)
-    }
+	checkPassword: function (inputPassword) {
+		return bcrypt.compareSync(inputPassword, this.password)
+	},
+	hashPassword: plainTextPassword => {
+		return bcrypt.hashSync(plainTextPassword, 10)
+	}
 }
+
 
 /* The hashPassword method does just what it says, it hashes the password. The first argument is the password to hash, and the second parameter is the salt length to generate (integer). */
 

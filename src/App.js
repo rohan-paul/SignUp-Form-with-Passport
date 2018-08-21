@@ -8,48 +8,49 @@ import LoginForm from './components/login-form'
 import Navbar from './components/navbar'
 
 import './App.css';
-import { runInContext } from 'vm';
+// import { runInContext } from 'vm';
 
 class App extends Component {
     constructor() {
         super()
         this.state = {
-            loggedIn: false,
-            username: null
+          loggedIn: false,
+          username: null
         }
-
+    
         this.getUser = this.getUser.bind(this)
+        this.componentDidMount = this.componentDidMount.bind(this)
         this.updateUser = this.updateUser.bind(this)
-    }
-
-    componentDidMount() {
+      }
+    
+      componentDidMount() {
         this.getUser()
-    }
-
-    updateUser(userObject) {
+      }
+    
+      updateUser (userObject) {
         this.setState(userObject)
-    }
+      }
 
     getUser() {
-        axios.get('/user').then(response => {
-            console.log('Get user response');
-            console.log(response.data)
-            if(response.data.user) {
-                console.log('Get User: There is a user saved in the server session');
+        axios.get('/user/').then(response => {
+          console.log('Get user response: ')
+          console.log(response.data)
+          if (response.data.user) {
+            console.log('Get User: There is a user saved in the server session: ')
 
-                this.setState({
-                    loggedIn: true,
-                    username: response.data.user.username
-                })
-            } else {
-                console.log('Get user: no user');
-                this.setState({
-                    loggedIn: false,
-                    username: null
-                })
-            }
+            this.setState({
+              loggedIn: true,
+              username: response.data.user.username
+            })
+          } else {
+            console.log('Get user: no user');
+            this.setState({
+              loggedIn: false,
+              username: null
+            })
+          }
         })
-    }
+      }
 
 
   render() {
@@ -60,20 +61,22 @@ class App extends Component {
       {/* Greet the user if he/she is logged-in (i.e. loggedIn is true) */}
       {this.state.loggedIn && <p>Join the party, {this.state.username}</p>}
         <Route
-            exact path="/"
-            component={Home} />
+        exact path="/"
+        component={Home} />
 
         <Route
-            path="/login"
-            render={() =>
-                <LoginForm updateUser={this.updateUser}
-                />}
-            />
+        path="/login"
+        render={() =>
+            <LoginForm
+            updateUser={this.updateUser}
+            />}
+        />
+
         <Route
-                path='/signup'
-                render={() =>
-                <Signup /> }
-            />
+        path="/signup"
+        render={() =>
+            <Signup/>}
+        />
       </div>
     );
   }
