@@ -18,8 +18,10 @@ On a related note, since mpromise is no longer supported, mongoose.Promise now c
 
 
 const userSchema = new Schema({
-    username: { type: String, unique: false, required: false },
-    password: { type: String, unique: false, required: false }
+
+	username: { type: String, unique: false, required: false },
+	password: { type: String, unique: false, required: false }
+
 })
 
 // Defining Schema methods
@@ -36,15 +38,15 @@ userSchema.methods = {
 /* The hashPassword method does just what it says, it hashes the password. The first argument is the password to hash, and the second parameter is the salt length to generate (integer). */
 
 // Defining hooks for pre-saving
-userSchema.pre('save', (next) => {
-    if(!this.password) {
-        console.log('models/user.js ========NO PASSWORD PROVIDED==========')
-        next()
-    } else {
-        console.log('models/user.js hashPassword in pre save')
-        this.password = this.hashPassword(this.password)
-        next()
-    }
+userSchema.pre('save', function (next) {
+	if (!this.password) {
+		console.log('models/user.js =======NO PASSWORD PROVIDED=======')
+		next()
+	} else {
+		console.log('models/user.js hashPassword in pre save');
+		this.password = this.hashPassword(this.password)
+		next()
+	}
 })
 
 const User = mongoose.model('User', userSchema)
